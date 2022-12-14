@@ -16,6 +16,16 @@ const background = new Sprite({
   imageSrc: './img/background1.png'
 })
 
+const mushroom = new Sprite({
+  position: {
+    x: 660,
+    y: 408
+  },
+  imageSrc: './img/mushroomidle.png', 
+  scale: 1.4,
+  framesMax: 9
+})
+
 const player = new Fighter({
   position: {
     x: 0,
@@ -29,6 +39,13 @@ const player = new Fighter({
     x: 0,
     y: 0,
   },
+  imageSrc: './img/HeroBlade/Idle.png',
+  framesMax: 8,
+  scale: 2.5,
+  offset: {
+    x: 215,
+    y: 150
+  }
 });
 
 const enemy = new Fighter({
@@ -78,6 +95,7 @@ function animate() {
   c.fillStyle = "black";
   c.fillRect(0, 0, canvas.width, canvas.height);
   background.update()
+  mushroom.update()
   player.update();
   enemy.update();
 
