@@ -27,17 +27,21 @@ class Sprite {
     );
   }
 
-  update() {
-    this.draw();
-    this.framesElapsed++;
+  animateFrames() {
+    this.framesElapsed++
 
     if (this.framesElapsed % this.framesHold === 0) {
       if (this.framesCurrent < this.framesMax - 1) {
-        this.framesCurrent++;
+        this.framesCurrent++
       } else {
-        this.framesCurrent = 0;
+        this.framesCurrent = 0
       }
     }
+  }
+
+  update() {
+    this.draw();
+    this.animateFrames();
   }
 }
 
@@ -49,7 +53,8 @@ class Fighter extends Sprite {
     imageSrc,
     scale = 1,
     framesMax = 1,
-    offset = {x: 0, y: 0}
+    offset = {x: 0, y: 0},
+    sprites
   }) {
     super({
         imageSrc, 
@@ -78,10 +83,20 @@ class Fighter extends Sprite {
     this.framesCurrent = 0;
     this.framesElapsed = 0;
     this.framesHold = 4;
+    this.sprites = sprites
+
+    for (const sprite in this.sprites) {
+      sprites[sprite].image = new Image()
+      sprites[sprite].image.src = sprites[sprite].imageSrc
+    }
+
+  
   }
 
   update() {
     this.draw();
+    this.animateFrames()
+    
     this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
     this.attackBox.position.y = this.position.y;
 
@@ -100,5 +115,16 @@ class Fighter extends Sprite {
     setTimeout(() => {
       this.isAttacking = false;
     }, 100);
+  }
+
+  switchSprite(sprite) {
+    switch (sprite) {
+      case 'idle':
+        break
+        case 'run':
+          break
+        case 'jump':
+          break
+    }
   }
 }

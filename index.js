@@ -39,13 +39,28 @@ const player = new Fighter({
     x: 0,
     y: 0,
   },
-  imageSrc: './img/HeroBlade/Idle.png',
+  imageSrc: './img/samurai1/Idle.png',
   framesMax: 8,
   scale: 2.5,
   offset: {
-    x: 215,
-    y: 150
-  }
+    x: 195,
+    y: 160
+  },
+  sprites: {
+    idle: {
+      imageSrc: './img/samurai1/Idle.png',
+      framesMax: 8
+    },
+    run: {
+      imageSrc: './img/samurai1/Run.png',
+      framesMax: 8
+    },
+    jump: {
+      imageSrc: './img/samurai1/Jump.png',
+      framesMax: 2
+    }
+  },
+  
 });
 
 const enemy = new Fighter({
@@ -97,16 +112,24 @@ function animate() {
   background.update()
   mushroom.update()
   player.update();
-  enemy.update();
+  // enemy.update();
 
   player.velocity.x = 0;
   enemy.velocity.x = 0;
 
   // player movement
+  player.switchSprite('idle')
   if (keys.a.pressed && player.lastKey === "a") {
     player.velocity.x = -5;
+    player.image = player.sprites.run.image
   } else if (keys.d.pressed && player.lastKey === "d") {
+    player.image = player.sprites.run.image
     player.velocity.x = 5;
+  }
+
+  if (player.velocity.y < 0) {
+    player.image = player.sprites.jump.image
+    player.framesMax = player.sprites.jump.framesMax
   }
 
   // enemy movement
