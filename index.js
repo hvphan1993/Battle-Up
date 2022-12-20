@@ -58,8 +58,13 @@ const player = new Fighter({
     jump: {
       imageSrc: './img/samurai1/Jump.png',
       framesMax: 2
+    },
+    fall: {
+      imageSrc: './img/samurai1/Fall.png',
+      framesMax: 2
     }
   },
+  
   
 });
 
@@ -90,9 +95,9 @@ const keys = {
   d: {
     pressed: false,
   },
-  w: {
-    pressed: false,
-  },
+  // w: {
+  //   pressed: false,
+  // },
   ArrowRight: {
     pressed: false,
   },
@@ -118,18 +123,22 @@ function animate() {
   enemy.velocity.x = 0;
 
   // player movement
-  player.switchSprite('idle')
+
   if (keys.a.pressed && player.lastKey === "a") {
-    player.velocity.x = -5;
-    player.image = player.sprites.run.image
+    player.velocity.x = -5
+    player.switchSprite('run')
+    
   } else if (keys.d.pressed && player.lastKey === "d") {
-    player.image = player.sprites.run.image
-    player.velocity.x = 5;
+    player.velocity.x = 5
+    player.switchSprite('run')
+  } else {
+    player.switchSprite('idle')
   }
 
   if (player.velocity.y < 0) {
-    player.image = player.sprites.jump.image
-    player.framesMax = player.sprites.jump.framesMax
+    player.switchSprite('jump')
+  } else if (player.velocity.y > 0) {
+    player.switchSprite('fall')
   }
 
   // enemy movement
