@@ -11,20 +11,20 @@ const gravity = 0.7;
 const background = new Sprite({
   position: {
     x: 0,
-    y: 0
+    y: 0,
   },
-  imageSrc: './img/background1.png'
-})
+  imageSrc: "./img/background1.png",
+});
 
 const mushroom = new Sprite({
   position: {
     x: 660,
-    y: 408
+    y: 408,
   },
-  imageSrc: './img/mushroomidle.png', 
+  imageSrc: "./img/mushroomidle.png",
   scale: 1.4,
-  framesMax: 9
-})
+  framesMax: 9,
+});
 
 const player = new Fighter({
   position: {
@@ -39,33 +39,43 @@ const player = new Fighter({
     x: 0,
     y: 0,
   },
-  imageSrc: './img/samurai1/Idle.png',
+  imageSrc: "./img/samurai1/Idle.png",
   framesMax: 8,
   scale: 2.5,
   offset: {
     x: 195,
-    y: 160
+    y: 160,
   },
   sprites: {
     idle: {
-      imageSrc: './img/samurai1/Idle.png',
-      framesMax: 8
+      imageSrc: "./img/samurai1/Idle.png",
+      framesMax: 8,
     },
     run: {
-      imageSrc: './img/samurai1/Run.png',
-      framesMax: 8
+      imageSrc: "./img/samurai1/Run.png",
+      framesMax: 8,
     },
     jump: {
-      imageSrc: './img/samurai1/Jump.png',
-      framesMax: 2
+      imageSrc: "./img/samurai1/Jump.png",
+      framesMax: 2,
     },
     fall: {
-      imageSrc: './img/samurai1/Fall.png',
-      framesMax: 2
-    }
+      imageSrc: "./img/samurai1/Fall.png",
+      framesMax: 2,
+    },
+    attack1: {
+      imageSrc: "./img/samurai1/Attack1.png",
+      framesMax: 6,
+    },
   },
-  
-  
+  attackBox: {
+    offset: {
+      x: 100,
+      y: 50,
+    },
+    width: 160,
+    height: 50,
+  },
 });
 
 const enemy = new Fighter({
@@ -81,6 +91,43 @@ const enemy = new Fighter({
   offset: {
     x: -50,
     y: 0,
+  },
+  imageSrc: "./img/HeroBlade/Idle.png",
+  framesMax: 11,
+  scale: 2.5,
+  offset: {
+    x: -295,
+    y: 132,
+  },
+  sprites: {
+    idle: {
+      imageSrc: "./img/HeroBlade/Idle.png",
+      framesMax: 11,
+    },
+    run: {
+      imageSrc: "./img/HeroBlade/Run.png",
+      framesMax: 8,
+    },
+    jump: {
+      imageSrc: "./img/HeroBlade/Jump.png",
+      framesMax: 3,
+    },
+    fall: {
+      imageSrc: "./img/HeroBlade/Fall.png",
+      framesMax: 3,
+    },
+    attack1: {
+      imageSrc: "./img/HeroBlade/Attack1.png",
+      framesMax: 7,
+    },
+  },
+  attackBox: {
+    offset: {
+      x: 360,
+      y: 50,
+    },
+    width: 100,
+    height: 50,
   },
 });
 
@@ -106,18 +153,16 @@ const keys = {
   },
 };
 
-
-
 decreaseTimer();
 
 function animate() {
   window.requestAnimationFrame(animate);
   c.fillStyle = "black";
   c.fillRect(0, 0, canvas.width, canvas.height);
-  background.update()
-  mushroom.update()
+  background.update();
+  mushroom.update();
   player.update();
-  // enemy.update();
+  enemy.update();
 
   player.velocity.x = 0;
   enemy.velocity.x = 0;
@@ -125,27 +170,36 @@ function animate() {
   // player movement
 
   if (keys.a.pressed && player.lastKey === "a") {
-    player.velocity.x = -5
-    player.switchSprite('run')
-    
+    player.velocity.x = -5;
+    player.switchSprite("run");
   } else if (keys.d.pressed && player.lastKey === "d") {
-    player.velocity.x = 5
-    player.switchSprite('run')
+    player.velocity.x = 5;
+    player.switchSprite("run");
   } else {
-    player.switchSprite('idle')
+    player.switchSprite("idle");
   }
 
   if (player.velocity.y < 0) {
-    player.switchSprite('jump')
+    player.switchSprite("jump");
   } else if (player.velocity.y > 0) {
-    player.switchSprite('fall')
+    player.switchSprite("fall");
   }
 
   // enemy movement
   if (keys.ArrowLeft.pressed && enemy.lastKey === "ArrowLeft") {
     enemy.velocity.x = -5;
+    enemy.switchSprite("run");
   } else if (keys.ArrowRight.pressed && enemy.lastKey === "ArrowRight") {
     enemy.velocity.x = 5;
+    enemy.switchSprite("run");
+  } else {
+    enemy.switchSprite("idle");
+  }
+  // jumping
+  if (enemy.velocity.y < 0) {
+    enemy.switchSprite("jump");
+  } else if (enemy.velocity.y > 0) {
+    enemy.switchSprite("fall");
   }
 
   // // detect for collision
@@ -175,9 +229,8 @@ function animate() {
 
   // end game based on health
   if (enemy.health <= 0 || player.health <= 0) {
-    determineWinner({player, enemy, timerId})
+    determineWinner({ player, enemy, timerId });
   }
-
 }
 
 animate();
