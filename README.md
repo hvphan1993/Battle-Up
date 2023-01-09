@@ -29,21 +29,21 @@ Alternatively
 ## Screenshots
 
 Game start
-![Game load in](../Battle-Up/img/screenshots/gamestart.png)
+![Game load in](/img/screenshots/gamestart.png)
 
 Character movement
-![character movement](../Battle-Up/img/screenshots/charactermove.png)
+![character movement](/img/screenshots/charactermove.png)
 
 Health Bars and Timer
-![health bars and timer feature](../Battle-Up/img/screenshots/healthbarstimer.png)
+![health bars and timer feature](/img/screenshots/healthbarstimer.png)
 
 Victory Screen
 
-![victory screen player win](../Battle-Up/img/screenshots/victory.png)
+![victory screen player win](/img/screenshots/victory.png)
 
 Tie
 
-![victory screen player win](../Battle-Up/img/screenshots/tie.png)
+![victory screen player win](/img/screenshots/tie.png)
 
 ##  Future Goals
 - Create menu screen
