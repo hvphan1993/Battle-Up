@@ -7,6 +7,8 @@ In this game, two brave warriors battle to see which will emerge victorious and 
 ``` 
 git clone https://github.com/hvphan1993/Battle-Up.git 
 ```
+- Right-click index.html and open in preferred browser to view game and test  
+
 Alternatively
 - Access game and play by clicking [Here!](https://hvphan1993.github.io/Battle-Up/)
 
@@ -42,9 +44,11 @@ Tie
 ![victory screen player win](../Battle-Up/img/screenshots/tie.png)
 
 ##  Future Goals
-
+- Create menu screen
+- Have the characters flip horizontally based on opponent's location
+- Add in sound effects and music
 
 ## Acknowledgements
-
+Thanks to Chris Courses for the tutorial on how to set up this project. 
 
 
