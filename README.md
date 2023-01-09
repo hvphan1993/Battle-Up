@@ -38,9 +38,11 @@ Health Bars and Timer
 ![health bars and timer feature](../Battle-Up/img/screenshots/healthbarstimer.png)
 
 Victory Screen
+
 ![victory screen player win](../Battle-Up/img/screenshots/victory.png)
 
 Tie
+
 ![victory screen player win](../Battle-Up/img/screenshots/tie.png)
 
 ##  Future Goals
